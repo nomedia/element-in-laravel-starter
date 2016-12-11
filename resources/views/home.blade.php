@@ -14,6 +14,11 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="//cdn.bootcss.com/ionicons/2.0.1/css/ionicons.min.css">
   <script>
+    window.Laravel = <?php echo json_encode([
+        'csrfToken' => csrf_token(),
+    ]); ?>
+</script>
+  <script>
     
     var domain="http://wx.jinhd.cn/";
      var domain="http://localhost:8000/";

@@ -52,6 +52,10 @@ export default {
 
 }
 
+.rightbar{
+  min-height: 600px;
+  background-color: white;
+}
 .toolbar .right{
       padding: 10px 0px 10px 1px;
    float: right;

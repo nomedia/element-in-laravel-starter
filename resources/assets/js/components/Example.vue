@@ -294,7 +294,7 @@ update:function(){
    input['_method']='patch';
 
 
-  this.$http.put(domain+'api/user/'+this.list.id,input, {
+  this.$http.put('/api/user/'+this.list.id,input, {
   }
   ).then((response) => {
   this.formErrors=[];
@@ -329,7 +329,7 @@ update:function(){
   this.loading=true;
   var loading=this.loading;
 
-  this.$http.get(domain+'api/users',{ params: {search:this.search,per_page:this.paginate.per_page ,page:this.paginate.page } }).then(function (response) {
+  this.$http.get('/api/users',{ params: {search:this.search,per_page:this.paginate.per_page ,page:this.paginate.page } }).then(function (response) {
   this.lists = response.data;
   console.log(this.lists.data);
   this.loading=false;
@@ -346,7 +346,7 @@ update:function(){
   var input = this.list;
   console.log(input);
 
-  this.$http.post(domain+'api/user',input, {
+  this.$http.post('/api/user',input, {
   }
   ).then((response) => {
   this.formErrors=[];
@@ -416,7 +416,7 @@ this.update();
 
 
   if(ids.length>0){
-  this.$http.post(domain+'api/user/-1',{_method:'DELETE', ids:ids}).then((response) => {
+  this.$http.post('/api/user/-1',{_method:'DELETE', ids:ids}).then((response) => {
   if(response.data.rs>0){
   this.$notify({ title: '成功', message: response.data.msg,type: 'success'});
   this.index();

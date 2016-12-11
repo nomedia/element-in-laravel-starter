@@ -30,42 +30,32 @@
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
+  <li class="treeview active">
+          <a href="#">
+            <i class="fa fa-share"></i> <span>系统设置</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu menu-open" style="display: block;">
+            <li> <router-link to="/auth/permission"><i class="fa fa-circle-o"></i> 权限管理</router-link></li>
+             <li>   <router-link to="/auth/role"><i class="fa fa-circle-o"></i> 角色管理</router-link></li>
+              <li>
 
-<el-row class="tac">
-  <el-col :span="24">
-   <li class="header">标签</li>
-    <el-menu default-active="2" class="el-menu-vertical-demo dark" @open="handleOpen" @close="handleClose"  theme="dark" >
-      <el-submenu index="1">
-        <template slot="title"><i class="el-icon-message"></i>系统设置</template>
-        <el-menu-item-group>
-          <template slot="title">权限管理</template>
-            <router-link to="/auth/user">     <el-menu-item index="1-1" router  >用户管理</el-menu-item></router-link>
-             <router-link to="/auth/role">    <el-menu-item index="1-3" >角色管理</el-menu-item></router-link>
-              <router-link to="/auth/permission">    <el-menu-item index="1-4" >权限管理</el-menu-item></router-link>
+               <router-link to="/auth/user">   <i class="fa fa-circle-user"></i> 用户管理
+               </router-link></li>
 
-                    <router-link to="/auth/menus">    <el-menu-item index="1-4" >菜单管理</el-menu-item></router-link>
-                      
-        </el-menu-item-group>
-        <el-menu-item-group title="员工管理">
-        
-           <router-link to="/ServiceOrderComplaint">     <el-menu-item index="1-1" router  >新建新员工</el-menu-item></router-link>
-             <router-link to="#">    <el-menu-item index="1-3" >新员工列表</el-menu-item></router-link>
-          
-        </el-menu-item-group>
-      </el-submenu>
+                <li>
 
+               <router-link to="/auth/menus">   <i class="fa fa-circle-user"></i> 菜单管理
+               </router-link></li>
+   
 
-
-      <el-menu-item index="2"><i class="el-icon-menu"></i>销售管理</el-menu-item>
+            </ul>
+            </li>
 
 
 
-
-
-      <el-menu-item index="3"><i class="el-icon-setting"></i>采购管理</el-menu-item>
-    </el-menu>
-  </el-col>
-</el-row>
 
 
      
@@ -74,6 +64,40 @@
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>重要</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>一般</span></a></li>
         <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>普通</span></a></li>
+<!-- 
+        <li class="treeview active">
+          <a href="#">
+            <i class="fa fa-share"></i> <span>系统设置</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu menu-open" style="display: block;">
+            <li><a href="#"><i class="fa fa-circle-o"></i> 权限管理</a></li>
+            <li class="active">
+              <a href="#"><i class="fa fa-circle-o"></i> 角色管理
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu menu-open" style="display: block;">
+                <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
+                <li>
+                  <a href="#"><i class="fa fa-circle-o"></i> Level Two
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                  </a>
+                  <ul class="treeview-menu">
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+          </ul>
+        </li> -->
       </ul>
     </section>
     <!-- /.sidebar -->

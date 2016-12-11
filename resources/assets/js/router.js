@@ -6,6 +6,12 @@ Vue.use(VueRouter)
 // Components
 
   import Example from './components/Example.vue';
+
+
+import AuthUser from './components/auth/User.vue'
+import AuthRole from './components/auth/Role.vue'
+import AuthPermission from './components/auth/Permission.vue'
+import AuthMenu from './components/auth/Menu.vue'
 /*import Dashboard2 from './components/Dashboard2'
 import Widgets from './components/Widgets'
 import Charts from './components/Charts'
@@ -22,6 +28,10 @@ import Login from './Login'*/
 const router = new VueRouter({
   routes: [
     { path: '/', component: Example },
+        { path: '/auth/user', component: AuthUser },
+    { path: '/auth/role', component: AuthRole },
+    { path: '/auth/permission', component: AuthPermission },
+        { path: '/auth/menus', component: AuthMenu },
  /*     { path: '/login', component: Login },
     { path: '/dashboard2', component: Dashboard2 },
     { path: '/widgets', component: Widgets },
