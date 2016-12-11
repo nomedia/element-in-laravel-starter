@@ -6,7 +6,7 @@
  */
 
 require('./bootstrap');
-
+require('../../../public/static/js/app.min.js')
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the body of the page. From here, you may begin adding components to
@@ -16,9 +16,16 @@ import App from './App.vue';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-default/index.css';
 
+
+// Plugins
+import router from './router'
+
+
 Vue.use(ElementUI);
 
-const app = new Vue({
-  el: '#app',
-  render: h => h(App)
-});
+new Vue({
+  router,
+  render: (h) => h(App)
+}).$mount('#app')
+
+Vue.http.options.emulateJSON = true;

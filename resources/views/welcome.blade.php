@@ -5,8 +5,6 @@
   <title>Example</title>
 </head>
 <body>
-  <div id="app"></div>
-
-  <script src="{{ asset('js/app.js') }}"></script>
+<h3>欢迎界面</h3>
 </body>
 </html>
