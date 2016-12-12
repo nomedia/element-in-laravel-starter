@@ -66,11 +66,11 @@
                 <label class="el-form-item__label" style="width: 100px;">排序 </label>
                 <div class="el-form-item__content" style="margin-left: 100px;">
                   <div class="el-input">
-                    <input type="text" v-model="list.sort" class="form-control" value="" />
+                    <input type="text" v-model="list.icon" class="form-control" value="" />
                     
                   </div>
                   <div class="el-form-item__error">
-                    <span v-for="error in formErrors['sort']" class="error text-danger"> {{ error}} </span>
+                    <span v-for="error in formErrors['icon']" class="error text-danger"> {{ error}} </span>
                   </div>
                 </div>
               </div>

@@ -44,13 +44,12 @@
 
                <router-link to="/auth/user">   <i class="fa fa-user"></i> 用户管理
                </router-link></li>
-
-                <li>
-
-               <router-link to="/auth/menus">   <i class="fa fa-list"></i> 菜单管理
-               </router-link></li>
+<!-- 
+                <li><router-link to="/auth/menus">   <i class="fa fa-list"></i> 菜单管理 </router-link></li>
+                <li><router-link to="/auth/fields">   <i class="fa fa-list"></i> 字段管理 </router-link></li>
+                <li><router-link to="/auth/button">   <i class="fa fa-list"></i> 按钮管理 </router-link></li>
    
-
+ -->
             </ul>
             </li>
 
