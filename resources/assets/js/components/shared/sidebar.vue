@@ -32,22 +32,22 @@
       <ul class="sidebar-menu">
   <li class="treeview active">
           <a href="#">
-            <i class="fa fa-share"></i> <span>系统设置</span>
+            <i class="fa fa-cogs"></i> <span>系统设置</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu menu-open" style="display: block;">
-            <li> <router-link to="/auth/permission"><i class="fa fa-circle-o"></i> 权限管理</router-link></li>
-             <li>   <router-link to="/auth/role"><i class="fa fa-circle-o"></i> 角色管理</router-link></li>
+            <li> <router-link to="/auth/permission"><i class="fa fa-cog"></i> 权限管理</router-link></li>
+             <li>   <router-link to="/auth/role"><i class="fa fa-plug"></i> 角色管理</router-link></li>
               <li>
 
-               <router-link to="/auth/user">   <i class="fa fa-circle-user"></i> 用户管理
+               <router-link to="/auth/user">   <i class="fa fa-user"></i> 用户管理
                </router-link></li>
 
                 <li>
 
-               <router-link to="/auth/menus">   <i class="fa fa-circle-user"></i> 菜单管理
+               <router-link to="/auth/menus">   <i class="fa fa-list"></i> 菜单管理
                </router-link></li>
    
 

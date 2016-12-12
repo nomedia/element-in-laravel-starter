@@ -38,14 +38,39 @@
                 </div>
               </div>
               <div class="el-form-item">
-                <label class="el-form-item__label" style="width: 100px;">名称 </label>
+                <label class="el-form-item__label" style="width: 100px;">URL </label>
                 <div class="el-form-item__content" style="margin-left: 100px;">
                   <div class="el-input">
-                    <input type="text" v-model="list.name" class="form-control" value="" />
+                    <input type="text" v-model="list.url" class="form-control" value="" />
                     
                   </div>
                   <div class="el-form-item__error">
-                    <span v-for="error in formErrors['name']" class="error text-danger"> {{ error}} </span>
+                    <span v-for="error in formErrors['url']" class="error text-danger"> {{ error}} </span>
+                  </div>
+                </div>
+              </div>
+                      <div class="el-form-item">
+                <label class="el-form-item__label" style="width: 100px;">图标 </label>
+                <div class="el-form-item__content" style="margin-left: 100px;">
+                  <div class="el-input">
+                    <input type="text" v-model="list.icon" class="form-control" value="" />
+                    
+                  </div>
+                  <div class="el-form-item__error">
+                    <span v-for="error in formErrors['icon']" class="error text-danger"> {{ error}} </span>
+                  </div>
+                </div>
+              </div>
+
+                         <div class="el-form-item">
+                <label class="el-form-item__label" style="width: 100px;">排序 </label>
+                <div class="el-form-item__content" style="margin-left: 100px;">
+                  <div class="el-input">
+                    <input type="text" v-model="list.sort" class="form-control" value="" />
+                    
+                  </div>
+                  <div class="el-form-item__error">
+                    <span v-for="error in formErrors['sort']" class="error text-danger"> {{ error}} </span>
                   </div>
                 </div>
               </div>
@@ -347,7 +372,7 @@ update:function(){
    input['_method']='patch';
 
 
-  this.$http.put(domain+'api/menus/'+this.list.id,input, {
+  this.$http.put('/api/menus/'+this.list.id,input, {
   }
   ).then((response) => {
   this.formErrors=[];
@@ -382,7 +407,7 @@ update:function(){
  // this.loading=true;
   var loading=this.loading;
 
-  this.$http.get(domain+'api/menus',{ params: {search:this.search,per_page:this.paginate.per_page ,page:this.paginate.page } }).then(function (response) {
+  this.$http.get('/api/menus',{ params: {search:this.search,per_page:this.paginate.per_page ,page:this.paginate.page } }).then(function (response) {
   this.lists = response.data;
   console.log(this.lists.data);
   this.loading=false;
@@ -455,7 +480,7 @@ update:function(){
   input.status=0;
   console.log(input);
 
-  this.$http.post(domain+'api/menus',input, {
+  this.$http.post('/api/menus',input, {
   }
   ).then((response) => {
   this.formErrors=[];
@@ -526,7 +551,7 @@ this.update();
 
 
 
-  this.$http.post(domain+'api/menus/-1',{_method:'DELETE', ids:ids}).then((response) => {
+  this.$http.post('/api/menus/-1',{_method:'DELETE', ids:ids}).then((response) => {
   if(response.data.rs>0){
   this.$notify({ title: '成功', message: response.data.msg,type: 'success'});
   this.index();

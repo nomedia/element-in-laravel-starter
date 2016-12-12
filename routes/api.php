@@ -29,6 +29,7 @@ Route::group(['middleware' => 'api'], function() {
 
 
 Route::resource('users',"Admin\Auth\UserController");
+Route::resource('menus',"Admin\Auth\MenuController");
 
 
 });
