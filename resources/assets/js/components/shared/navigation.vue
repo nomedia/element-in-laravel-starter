@@ -168,14 +168,14 @@
                   <a href="#" class="btn btn-default btn-flat">个人信息</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">退出登录</a>
+                  <a href="#" @click="logout" class="btn btn-default btn-flat">退出登录</a>
                 </div>
               </li>
             </ul>
           </li>
           <!-- Control Sidebar Toggle Button -->
           <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+            <a  data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
           </li>
         </ul>
       </div>
@@ -185,6 +185,22 @@
 
 <script>
 export default {
+
+  methods:{
+    logout:function(){
+
+
+
+  this.$http.post('/logout', {foo: 'bar'}).then((response) => {
+
+
+window.location.reload();
+
+  }, (response) => {
+    // error callback
+  });
+    }
+  }
 
 }
 </script>
