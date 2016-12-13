@@ -3,5 +3,6 @@
 /vendor
 /.idea
 Homestead.json
+/.svn
 Homestead.yaml
 .env
