@@ -64,7 +64,7 @@ return [
     'numeric'              => 'The :attribute must be a number.',
     'present'              => 'The :attribute field must be present.',
     'regex'                => 'The :attribute format is invalid.',
-    'required'             => 'The :attribute field is required.',
+    'required'             => '不能为空',
     'required_if'          => 'The :attribute field is required when :other is :value.',
     'required_unless'      => 'The :attribute field is required unless :other is in :values.',
     'required_with'        => 'The :attribute field is required when :values is present.',
@@ -80,7 +80,7 @@ return [
     ],
     'string'               => 'The :attribute must be a string.',
     'timezone'             => 'The :attribute must be a valid zone.',
-    'unique'               => 'The :attribute has already been taken.',
+    'unique'               => '已存在',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
 
@@ -99,6 +99,17 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+/*        'display_name'=>[
+         'required'=>"显示名字不能为空",
+         'unique'=>"显示名字已经存在",
+         'min'=>"显示名字要大于一字符",
+         ],
+
+              'name'=>[
+         'required'=>"名称不能为空",
+         'unique'=>"名称已经存在",
+         'min'=>"名称要大于一字符",
+         ],*/
     ],
 
     /*
