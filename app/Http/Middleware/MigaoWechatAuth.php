@@ -21,7 +21,6 @@ class MigaoWechatAuth
 
       $user=Session::get("MIGAO_WECHAT_USER");
 
-dump($user);
 
       if(!$user){
 
@@ -48,7 +47,7 @@ dump($user);
          Session::put('MIGAO_WECHAT_USER',$mu);
      $user=Session::get("MIGAO_WECHAT_USER");
            
-dump($user);
+
 
       }else{
 
