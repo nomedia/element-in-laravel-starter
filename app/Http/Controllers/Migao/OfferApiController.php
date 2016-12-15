@@ -157,8 +157,7 @@ if($rs){
 //
           public function myOffer()
     {
-
-        $user=Session::get('MIGAO_WECHAT_USER');
+           $user=Session::get('MIGAO_WECHAT_USER');
         $user_id=$user->id;
 
         $lists=OfferOffer::where('user_id',$user_id)->get();
@@ -199,10 +198,9 @@ $list['count']=$count;
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public functio
-
-    $user=Session::get('MIGAO_WECHAT_USER');n up(Request $request)
-    {  $user_id=$user->id;
+    public function up(Request $request)
+    {     $user=Session::get('MIGAO_WECHAT_USER');
+        $user_id=$user->id;
 
 
 
