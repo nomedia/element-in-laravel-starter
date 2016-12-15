@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class OfferApiController extends Controller
 {
+
+
+    public function home(){
+
+        
+    }
     /**
      * Display a listing of the resource.
      *
