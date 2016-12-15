@@ -21,6 +21,8 @@ class MigaoWechatAuth
 
       $user=Session::get("MIGAO_WECHAT_USER");
 
+
+
       if(!$user){
          $mu=new OfferUser;
          $mu->openid=$request->openid;
@@ -29,7 +31,7 @@ class MigaoWechatAuth
 
          $mu->save();
 
-         Session::put($mu);
+         Session::set('MIGAO_WECHAT_USER',$mu);
 
       }else{
 
