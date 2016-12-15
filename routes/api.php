@@ -63,7 +63,7 @@ Route::get('offer/myOffer',"Migao\OfferApiController@myOffer");
 Route::get('offer/share',"Migao\OfferApiController@share");
 
 
-Route::get('offer/home',"Migao\OfferApiController@home");
+Route::get('offer/index',"Migao\OfferApiController@home");
 
 Route::get('offer/getShare',"Migao\OfferApiController@getShare");
 

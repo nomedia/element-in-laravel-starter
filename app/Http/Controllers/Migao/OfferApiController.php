@@ -14,7 +14,7 @@ class OfferApiController extends Controller
 
     public function home(){
 
-        
+        return view('migao.offer.index');
     }
     /**
      * Display a listing of the resource.
