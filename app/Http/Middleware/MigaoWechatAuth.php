@@ -36,6 +36,8 @@ class MigaoWechatAuth
          $count=OfferUser::where('openid',$request->openid)->first();
 
          if($count){
+
+               OfferUser::where('openid',$request->openid)->update(['nickname'=>$request->nickname,'head'=>$request->headimgurl]);
             $mu=$count;
          }else{
             $mu->save();
