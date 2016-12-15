@@ -24,14 +24,26 @@ class MigaoWechatAuth
 
 
       if(!$user){
+
+
+
          $mu=new OfferUser;
          $mu->openid=$request->openid;
          $mu->nickname=$request->nickname;
          $mu->head=$request->headimgurl;
 
-         $mu->save();
+         //判断数据库里面有没有存在 
+         $count=OfferUser::where('openid',$request->openid)->first();
 
-         Session::set('MIGAO_WECHAT_USER',$mu);
+         if($count){
+            $mu=$count;
+         }else{
+            $mu->save();
+         }
+
+         
+
+         Session::put('MIGAO_WECHAT_USER',$mu);
 
       }else{
 
