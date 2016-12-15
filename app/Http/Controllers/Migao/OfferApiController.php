@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Migao;
 use App\Http\Controllers\Controller;
 use App\Models\Migao\OfferCollege;
 use App\Models\Migao\OfferOffer;
+use App\Models\Migao\OfferUp;
 use Illuminate\Http\Request;
 
 class OfferApiController extends Controller
@@ -16,7 +17,10 @@ class OfferApiController extends Controller
      */
     public function getCollegeRanking()
     {
-       $lists= OfferCollege::with('offerCount')->get();
+
+$college=OfferOffer::groupby('college_id')->distinct()->get(['college_id']);
+
+       $lists= OfferCollege::with('offerCount')->whereIn('id',$college)->get();
 
 
 
@@ -26,7 +30,19 @@ class OfferApiController extends Controller
 
         public function getHighRanking()
     {
-       
+        $lists=OfferOffer::groupby('high')->distinct()->get(['high']);
+
+
+    foreach ($lists as $key => $list) {
+
+     
+       $lists[$key]['count']=OfferOffer::where('high',$list->high)->count();
+
+
+
+    }
+    return $lists;
+
     }
 
     //根据学校ID获取该高中排名
@@ -54,7 +70,7 @@ class OfferApiController extends Controller
 //根据高中
         public function getOfferByCollegeHigh($college_id,$high)
     {
-    $lists=OfferOffer::where('high',$high)->where('college_id',$college_id)->get();
+    $lists=OfferOffer::with('college')->where('high',$high)->where('college_id',$college_id)->get();
 
         return $lists;
     }
@@ -62,7 +78,25 @@ class OfferApiController extends Controller
 //根据高中获取录取大学列表
           public function getCollegeByHigh($high_id)
     {
-        //
+
+
+ $list=OfferOffer::where('high',$high_id)->groupby('college_id')->distinct()->get(['college_id']);
+
+$lists=OfferCollege::whereIn('id',$list)->get();
+
+
+  foreach ($lists as $key => $list) {
+
+     
+       $lists[$key]['count']=OfferOffer::where('high',$high_id)->where('college_id',$list->id)->count();
+
+
+
+    }
+
+return $lists;
+
+
     }
 
 
@@ -79,9 +113,10 @@ class OfferApiController extends Controller
 
 
 
+
         $d=new OfferOffer;
         
-   $d->user_id=0;
+   $d->user_id=1;
 
         $d->name=$request->data['name'];
         $d->college_id=$request->data['college_id'];
@@ -93,8 +128,20 @@ class OfferApiController extends Controller
 
      //   dump($request->data['name']);
 
-        $d->save();
+        $rs=$d->save();
 
+if($rs){
+    $data['rs']=1;
+    $data['data']=$d;
+    return $data;
+
+}else{
+
+        $data['rs']=0;
+    $data['data']=$d;
+    return $data;
+
+}
         return $d;
 
        // dump($request->all());
@@ -108,8 +155,14 @@ class OfferApiController extends Controller
 //获取我所有的offer
 //
 //
-          public function getMyUpOffer($key)
+          public function myOffer()
     {
+        $user_id=1;
+
+        $lists=OfferOffer::where('user_id',$user_id)->get();
+
+        return $lists;
+
         
     }
 
@@ -121,9 +174,21 @@ class OfferApiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function share(Request $request)
     {
-        //
+        return 2;
+    }
+
+
+      public function getShare(Request $request)
+    {  $id=$request->id;
+
+        $list=OfferOffer::with('up.user')->where('id',$id)->first();
+
+        $count=OfferUp::where('offer_id',$id)->count();
+$list['count']=$count;
+
+        return $list;
     }
 
     /**
@@ -132,9 +197,30 @@ class OfferApiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function up(Request $request)
+    {  $user_id=1;
+
+
+
+            $id=$request->id;
+        
+        $has=OfferUp::where('user_id',$user_id)->where('offer_id',$id)->first();
+
+        if($has){
+
+            return 2;
+
+        }else{
+            $up=new OfferUp;
+            $up->user_id=$user_id;
+            $up->offer_id=$id;
+
+            $up->save();
+
+        }
+
+    
+        return $id;
     }
 
     /**

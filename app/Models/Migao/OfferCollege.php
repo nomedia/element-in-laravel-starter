@@ -26,6 +26,6 @@ public function offerCount()
     ->selectRaw('college_id, count(*) as count')
     ->groupBy('college_id');
 }
- 
+  
 
 }
