@@ -36,6 +36,11 @@ Route::resource('fields',"Admin\Auth\FieldController");
 Route::resource('tables',"Admin\Auth\TableController");
 
 
+
+});
+
+Route::group(['middleware' => ['api','migao_wechat_auth']], function() {
+
 	 header('Access-Control-Allow-Origin: *');
 
 //米高offer
