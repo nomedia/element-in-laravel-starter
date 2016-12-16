@@ -7,12 +7,18 @@ use App\Models\Migao\OfferCollege;
 use App\Models\Migao\OfferOffer;
 use App\Models\Migao\OfferUp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class OfferApiController extends Controller
 {
+   public function sharet(){
 
+        return view('migao.offer.share');
+    }
 
     public function home(){
+
+
 
         return view('migao.offer.index');
     }
@@ -28,9 +34,9 @@ $college=OfferOffer::groupby('college_id')->distinct()->get(['college_id']);
 
        $lists= OfferCollege::with('offerCount')->whereIn('id',$college)->get();
 
-
-
-       return $lists;
+   $mostReleases = $lists->sortBy('name');
+$mostReleases->values()->all();
+       return $mostReleases;
     }
 
 
@@ -121,14 +127,22 @@ return $lists;
 
 
         $d=new OfferOffer;
-        
-   $d->user_id=1;
+         $user=Session::get('MIGAO_WECHAT_USER');
+        $user_id=$user->id;
+   $d->user_id=$user_id;
 
         $d->name=$request->data['name'];
         $d->college_id=$request->data['college_id'];
         $d->high=$request->data['high'];
+
+        if(!empty($request->data['consultant'])){
         $d->consultant=$request->data['consultant'];
+        }
+
+         if(!empty($request->data['instructor'])){
         $d->instructor=$request->data['instructor'];
+}
+
         $d->identity=$request->data['identity'];
         $d->result=$request->data['result'];
 
@@ -166,8 +180,10 @@ if($rs){
            $user=Session::get('MIGAO_WECHAT_USER');
         $user_id=$user->id;
 
-        $lists=OfferOffer::where('user_id',$user_id)->get();
 
+
+        $lists=OfferOffer::where('user_id',$user_id)->get();
+      
         return $lists;
 
         
@@ -190,7 +206,7 @@ if($rs){
       public function getShare(Request $request)
     {  $id=$request->id;
 
-        $list=OfferOffer::with('up.user')->where('id',$id)->first();
+        $list=OfferOffer::with('up.user','college')->where('id',$id)->first();
 
         $count=OfferUp::where('offer_id',$id)->count();
 $list['count']=$count;

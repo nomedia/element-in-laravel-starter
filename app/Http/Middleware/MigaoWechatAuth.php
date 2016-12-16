@@ -19,6 +19,8 @@ class MigaoWechatAuth
     {
 
 
+
+  
       $user=Session::get("MIGAO_WECHAT_USER");
 
 

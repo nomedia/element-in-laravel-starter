@@ -1,38 +1,222 @@
-<!DOCTYPE html><html><head><meta charset=utf-8><title>2017年美国本科Offer</title><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"><link rel=stylesheet href=http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css><link rel=stylesheet type=text/css href=/static/reset.css><link rel=stylesheet href=https://unpkg.com/mint-ui/lib/style.css><link rel=stylesheet href=//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css><script src=http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js></script><script src=http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js></script><script>var domain="http://universityadmintest.migao.me/";</script><style>html {
-  touch-action: manipulation;
-}</style><link href=/static/css/app.77a28d1026c7259a919d210e4941ca4e.css rel=stylesheet></head><body><div id=app></div><script type=text/javascript src=/static/js/manifest.4a86e330bd807dea4a87.js></script><script type=text/javascript src=/static/js/vendor.95bba9a301763b449437.js></script><script type=text/javascript src=/static/js/app.b8fa4b156af4c6b6056e.js></script></body></html><script src=http://res.wx.qq.com/open/js/jweixin-1.0.0.js></script><script>/*
-   * 注意：ga
-   * 1. 所有的JS接口只能在公众号绑定的域名下调用，公众号开发者需要先登录微信公众平台进入“公众号设置”的“功能设置”里填写“JS接口安全域名”。i
-   * 2. 如果发现在 Android 不能分享自定义内容，请到官网下载最新的包覆盖安装，Android 自定义分享接口需升级至 6.0.2.58 版本及以上。
-   * 3. 完整 JS-SDK 文档地址：http://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html
-   *
-   * 如有问题请通过以下渠道反馈：
-   * 邮箱地址：weixin-open@qq.com
-   * 邮件主题：【微信JS-SDK反馈】具体问题
-   * 邮件内容说明：用简明的语言描述问题所在，并交代清楚遇到该问题的场景，可附上截屏图片，微信团队会尽快处理你的反馈。
-   */
-  wx.config({
-    appId: '3',
-    timestamp: 3,
-    nonceStr: '2',
-    signature: '1',
-    jsApiList: [
-        'checkJsApi',
-        'onMenuShareTimeline',
-        'onMenuShareAppMessage',
-        'onMenuShareQQ',
-        'onMenuShareWeibo',
-      ]
-  });
-wx.ready(function () {
-     var shareData = {
-    title: '这个圣诞好 “玫荔”',
-    desc: '享3元购买玫瑰荔枝口味圆筒冰淇淋优惠', 
-    link: document.URL,
-    imgUrl: 'http://roselycheecone.nimads.com/share.png'
-  };
-     wx.onMenuShareAppMessage(shareData);
-     wx.onMenuShareTimeline(shareData);
-     wx.onMenuShareQQ(shareData);
-     wx.onMenuShareWeibo(shareData);
-});</script>
+@extends('migao.offer.layout')
+      
+      @section('css')
+
+   .btn_group {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: fixed;
+    bottom: 0px;
+}
+      @endsection
+
+      @section('content')
+
+
+<mt-navbar v-model="selected">
+  <mt-tab-item id="1">按录取学校查询</mt-tab-item>
+  <mt-tab-item id="2">按毕业高中查询</mt-tab-item>
+
+</mt-navbar>
+
+
+
+<!-- tab-container -->
+<mt-tab-container v-model="selected" >
+  <mt-tab-container-item id="1"   >
+
+<div  ref="listWrapper">
+
+<ul class="home_ul" 
+  v-infinite-scroll="loadMore"
+  infinite-scroll-disabled="loading"
+  infinite-scroll-distance="10">
+
+  <li v-for="(item ,index) in list"  @click="showHighByCollege(item.id,item.name)">
+
+
+  <div class="col-xs-1">
+      @{{ index+1 }}
+  </div>
+  <div class="col-xs-5">
+    @{{ item.name }}
+  </div>
+
+    <div class="col-xs-5 float_right" >
+     录取人数：<span v-if="item.offer_count.length">  <span v-for="counts in item.offer_count">
+      @{{counts.count?counts.count:0}} 
+     
+      人</span>  </span>   <span v-else> 0 人</span>         <i class="fa fa-angle-right" aria-hidden="true"></i>
+  </div>
+
+  </li>
+
+</ul>
+
+
+</div>
+
+
+  </mt-tab-container-item>
+  <mt-tab-container-item id="2">
+<ul class="home_ul" 
+  v-infinite-scroll="loadMore"
+  infinite-scroll-disabled="loading"
+  infinite-scroll-distance="10">
+  <li v-for="(item ,index) in high"  @click="showCollegeByHigh(item.high,item.high)">
+
+
+  <div class="col-xs-1 c999" >
+      @{{ index+1 }}
+  </div>
+  <div class="col-xs-5">
+    @{{ item.high }}
+  </div>
+
+    <div class="col-xs-5 float_right">
+     获得 offer  @{{ item.count }}   &nbsp;&nbsp; <i class="fa fa-angle-right" aria-hidden="true"></i>
+  </div>
+
+  </li>
+</ul>
+  </mt-tab-container-item>
+
+</mt-tab-container>
+
+
+<div class="col-xs-12 btn_group">
+  
+<a href="/offer/myOffer">
+<input type="button" class="btn btn-default myOffer" value="我提交的 offer"> 
+</a>
+<a href="/offer/form">
+
+<input type="button" class="btn btn-primary offerForm" value="新增 offer"> 
+</a>
+</div> 
+
+
+
+
+
+</div>
+
+
+
+
+    </div>
+    <!-- built files will be auto injected -->
+  </body>
+
+
+</html>
+
+@include('migao.offer.baseShare')
+
+  <script>
+
+
+
+    var app = new Vue({
+      el: '#app',
+    data: {
+      selected: '1',
+      noData:0,
+      heigh:[],
+
+         list:[
+  
+
+
+      ],
+ 
+
+    
+  },
+
+  
+  created : function(){
+
+
+this.loadData();
+this.loadHighData();
+
+
+
+
+
+
+  },
+       methods:{
+        handleClick: function() {
+          this.$toast('Hello world!')
+        },
+
+           _initScroll :function() {
+     this.listScroll = new BScroll(this.$refs.listWrapper, {})
+   
+    },
+    _calculateHeight :function() {
+      this.listWrapper = new BScroll(this.$refs.listWrapper, {})
+  
+    },
+
+    loadData:function(){
+
+ this.$http.get('/api/offer/getCollegeRanking').then((response) => {
+      response = response.body
+      console.log(response)
+      this.list = response
+      console.log(this.goods)
+      this.$nextTick(() => {
+     //   this._initScroll()
+       // this._calculateHeight()
+      })
+    })
+    },
+
+        loadHighData:function(){
+
+ this.$http.get('/api/offer/getHighRanking').then((response) => {
+      response = response.body
+  
+      this.high = response
+    
+      this.$nextTick(() => {
+     //   this._initScroll()
+       // this._calculateHeight()
+      })
+    })
+    },
+
+showCollegeByHigh:function(id,high){
+    window.location.href='/offer/highList?id='+id+"&school="+high;
+
+},
+
+
+
+    showHighByCollege:function(id,school){
+
+window.location.href='/offer/collegeList?id='+id+"&school="+school;
+
+    },
+
+        loadMore:function() {
+  this.loading = true;
+  setTimeout(() => {
+    let last = this.list[this.list.length - 1];
+    for (let i = 1; i <= 10; i++) {
+    //  this.list.push(last + i);
+    }
+    this.loading = false;
+  }, 2500);
+}
+      },
+
+
+    })
+  </script>
+
+
+@endsection
